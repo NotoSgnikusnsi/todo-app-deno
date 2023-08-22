@@ -1,1 +1,36 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <title>Noto-ToDo-App</title>
+  </head>
+  <body>
+    <div class="content">
+      <div class="section">
+        <h1>TODO-APP</h1>
+        <h2>タスクの追加</h2>
+        <form id="add-task-form" class="add-form">
+          <div class="field">
+            <div class="control">
+              <input id="todo-input" type="text" class="input" placeholder="e.g Coding" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button id="todo-button" class="button is-primary">追加</button>
+            </div>
+          </div>
+        </form>
+        <h2>タスク一覧</h2>
+        <ul id="tasks">
+          <li id="1" id="task">Task_1</li>
+          <li id="2" id="task">Task_2</li>
+          <li id="3" id="task">Task_3</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,9 @@
 ## URL
 [Deno Deploy](noto-todo-app.deno.dev)
 ## 使用技術
-- HTML/CSS
+- HTML
+- CSS
+  - Bulma
 - JavaScript
 - Deno
 - MongoDB
