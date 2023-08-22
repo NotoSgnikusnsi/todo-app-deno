@@ -1,9 +1,10 @@
 # todoApp-deno
+## URL
+[Deno Deploy](noto-todo-app.deno.dev)
 ## 使用技術
 - HTML/CSS
 - JavaScript
 - Deno
-- Deno Deploy(デプロイ先)
 - MongoDB
 
 ## TODO
