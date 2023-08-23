@@ -33,4 +33,20 @@
       </div>
     </div>
   </body>
+  <script type="module">
+    document.getElementById('todo-button').onclick = async (e) => {
+      e.preventDefault();
+      const task = document.getElementById('todo-input').value;
+      try {
+        await fetch('/add-task', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ task: task }),
+        });
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  </script>
 </html>
