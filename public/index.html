@@ -38,11 +38,13 @@
       e.preventDefault();
       const task = document.getElementById('todo-input').value;
       try {
+        document.getElementById('todo-button').classList.add('is-loading');
         await fetch('/add-task', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ task: task }),
         });
+        document.getElementById('todo-button').classList.remove('is-loading');
         window.location.reload();
       } catch (error) {
         console.log(error);
