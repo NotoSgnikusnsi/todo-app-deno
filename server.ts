@@ -1,17 +1,20 @@
 import { serve } from "https://deno.land/std@0.180.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.180.0/http/file_server.ts";
-import { insertTask } from "./dbConnecter.ts";
+import { insertTask, getTasks } from "./dbConnecter.ts";
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
   console.log(pathname);
 
-	if (req.method === "GET") {
-		console.log("GET")
-	} else if (req.method === "POST") {
-		console.log("OK")
+		// タスクの取得
+		if (pathname === "/get-tasks" && req.method === "GET") {
+			const tasks = await getTasks();
+			console.log("OK,server.ts")
+			return JSON.stringify(tasks);
+		}
+
 		// タスクの追加
-		if(pathname === "/add-task"){
+		if(pathname === "/add-task" && req.method === "POST"){
 			const reqJson = await req.json();
 			console.log(reqJson)
 			if ( reqJson && reqJson.task !== undefined) {
@@ -19,9 +22,6 @@ serve(async (req) => {
 				return new Response("success");
 			}
 		}
-		
-	}
-
 	// フロントに送信
   return serveDir(req, {
       fsRoot: "public",

@@ -34,6 +34,16 @@
     </div>
   </body>
   <script type="module">
+    window.onload = async () => {
+      try {
+        const res = await fetch('/get-tasks');
+        console.log('OK,index.html');
+        const tasks = JSON.stringify(res);
+        console.log(tasks);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     document.getElementById('todo-button').onclick = async (e) => {
       e.preventDefault();
       const task = document.getElementById('todo-input').value;
