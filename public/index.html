@@ -36,8 +36,9 @@
   <script type="module">
     window.onload = async () => {
       try {
-        const res = await fetch('/get-tasks');
         console.log('OK,index.html');
+        const res = await fetch('/get-tasks');
+        console.log('OK,index.html _ susususu');
         const tasks = JSON.stringify(res);
         console.log(tasks);
       } catch (error) {

@@ -10,6 +10,7 @@ serve(async (req) => {
 		if (pathname === "/get-tasks" && req.method === "GET") {
 			const tasks = await getTasks();
 			console.log("OK,server.ts")
+			console.log(JSON.stringify(tasks))
 			return JSON.stringify(tasks);
 		}
 
