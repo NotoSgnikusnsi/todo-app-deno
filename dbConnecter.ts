@@ -50,9 +50,11 @@ export const insertTask = async(task:string) => {
   } catch (error) {
     console.error("Error inserting task:", error);
   }
+  /*
   finally {
     await closeConnection();
   }
+  */
 }
 
 // 全タスクの取得
@@ -64,11 +66,10 @@ export const getTasks = async () => {
 
   // データの取得
   const res: TaskSchema[] = await tasksClient.find({}).toArray();
+  console.log("db:", JSON.stringify(res, null, 2))
   return res; 
   } catch (error) {
     console.error("Error inserting task:", error);
-  } finally {
-    await closeConnection();
   }
 }
 
