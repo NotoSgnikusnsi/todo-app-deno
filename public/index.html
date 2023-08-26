@@ -34,6 +34,20 @@
     </div>
   </body>
   <script type="module">
+    window.onload = async () => {
+      try {
+        const response = await fetch('/get-tasks');
+        const json = await response?.json();
+        if (json && json[0] !== undefined) {
+          for (let i = 0; i < json.length ; i++) {
+            document.getElementById('tasks').innerHTML += `<li id="">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'
+            }</li>`;
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     document.getElementById('todo-button').onclick = async (e) => {
       e.preventDefault();
       const task = document.getElementById('todo-input').value;

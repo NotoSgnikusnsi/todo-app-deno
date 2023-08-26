@@ -1,4 +1,4 @@
-import { Bson, Database, MongoClient } from "https://deno.land/x/mongo@v0.31.2/mod.ts";
+import { Database, MongoClient } from "https://deno.land/x/mongo@v0.31.2/mod.ts";
 import { TaskSchema } from "./schema.ts";
 import { MONGO_URL } from "./constants.ts";
 
@@ -31,6 +31,7 @@ const closeConnection = async() => {
   }
 }
 
+// タスクの追加
 export const insertTask = async(task:string) => {
   try {
     //Connect DB
@@ -49,8 +50,27 @@ export const insertTask = async(task:string) => {
   } catch (error) {
     console.error("Error inserting task:", error);
   }
-  /*finally {
+  /*
+  finally {
     await closeConnection();
   }
   */
 }
+
+// 全タスクの取得
+export const getTasks = async () => {
+  try {
+      // Connect DB
+  await initConnection()
+  const tasksClient = db!.collection<TaskSchema>("task");
+
+  // データの取得
+  const response: TaskSchema[] = await tasksClient.find({}).toArray();
+  return response; 
+  } catch (error) {
+    console.error("Error inserting task:", error);
+  }
+}
+
+// 特定のタスクの取得
+// タスクの削除
