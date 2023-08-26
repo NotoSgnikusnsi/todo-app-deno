@@ -65,9 +65,8 @@ export const getTasks = async () => {
   const tasksClient = db!.collection<TaskSchema>("task");
 
   // データの取得
-  const res: TaskSchema[] = await tasksClient.find({}).toArray();
-  console.log("db:", JSON.stringify(res, null, 2))
-  return res; 
+  const response: TaskSchema[] = await tasksClient.find({}).toArray();
+  return response; 
   } catch (error) {
     console.error("Error inserting task:", error);
   }

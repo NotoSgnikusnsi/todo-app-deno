@@ -36,9 +36,14 @@
   <script type="module">
     window.onload = async () => {
       try {
-        console.log('OK,index.html');
-        const res = await fetch('/get-tasks');
-        const tasks = JSON.stringify(res);
+        const response = await fetch('/get-tasks');
+        const json = await response?.json();
+        if (json && json[0] !== undefined) {
+          for (let i = 0; i < json.length - 1; i++) {
+            document.getElementById('tasks').innerHTML += `<li id="">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'
+            }</li>`;
+          }
+        }
       } catch (error) {
         console.log(error);
       }

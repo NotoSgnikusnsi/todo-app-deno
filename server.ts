@@ -8,9 +8,8 @@ serve(async (req) => {
 
 		// タスクの取得
 		if (pathname === "/get-tasks" && req.method === "GET") {
-			const tasks = await getTasks();
-			console.log("OK,server.ts")
-			return new Response(JSON.stringify(tasks));
+			const response = await getTasks();
+			return new Response(JSON.stringify(response));
 		}
 
 		// タスクの追加
