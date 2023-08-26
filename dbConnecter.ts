@@ -1,4 +1,4 @@
-import { Bson, Database, MongoClient, ObjectId } from "https://deno.land/x/mongo@v0.31.2/mod.ts";
+import { Database, MongoClient } from "https://deno.land/x/mongo@v0.31.2/mod.ts";
 import { TaskSchema } from "./schema.ts";
 import { MONGO_URL } from "./constants.ts";
 
