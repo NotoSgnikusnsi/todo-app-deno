@@ -36,6 +36,7 @@
       try {
         const response = await fetch('/get-tasks');
         const json = await response?.json();
+        const taskList = document.getElementById("tasks");
         if (json && json[0] !== undefined) {
           for (let i = 0; i < json.length ; i++) {
             const li = document.createElement("li")
@@ -49,10 +50,9 @@
             deleteButton.classList.add("button")
             deleteButton.onclick = handleDeleteButtonClick;
 
-            li.append(deleteButton);
+            li.appendChild(deleteButton);
             
-            document.getElementById("tasks").innerHTML += li;
-
+            taskList.appendChild(li);
             // document.getElementById('tasks').innerHTML += `<li id="${json[i]["_id"]}">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'}</li>`;
           }
         }
