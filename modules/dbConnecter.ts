@@ -69,7 +69,7 @@ export const getTasks = async () => {
 
     // データの取得
     const response: TaskSchema[] = await tasksClient.find({}).toArray();
-    return new Response("Success getting task.");
+    return response;
   } catch (error) {
     console.error('Error getting task:', error);
   }

@@ -8,8 +8,8 @@ serve(async (req) => {
 
   // タスクの取得
   if (pathname === '/get-tasks' && req.method === 'GET') {
-    const response = await getTasks();
-    console.log(JSON.stringify(response));
+    const id = new URL(req.url).searchParams.get("id")
+    const response = await getTasks(id);
     return new Response(JSON.stringify(response));
   }
 
