@@ -38,9 +38,12 @@
       try {
         const response = await fetch('/get-tasks');
         const json = await response?.json();
+        console.log(JSON.stringify(json));
         if (json && json[0] !== undefined) {
           for (let i = 0; i < json.length ; i++) {
-            document.getElementById('tasks').innerHTML += `<li id="">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'
+            const li = document.createElement("li")
+            li.id = json[i]["_id"]
+            document.getElementById('tasks').innerHTML += `<li id="${json[i]["_id"]}">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'
             }</li>`;
           }
         }
@@ -48,6 +51,7 @@
         console.log(error);
       }
     };
+
     document.getElementById('todo-button').onclick = async (e) => {
       e.preventDefault();
       const task = document.getElementById('todo-input').value;
@@ -71,5 +75,7 @@
         return;
       }
     };
+
+    document.getElementById("delete-button")
   </script>
 </html>

@@ -4,6 +4,7 @@ import {
 } from 'https://deno.land/x/mongo@v0.31.2/mod.ts';
 import { TaskSchema } from './schema.ts';
 import { MONGO_URL } from './constants.ts';
+import { ObjectId } from 'https://deno.land/x/web_bson@v0.3.0/mod.js';
 
 const client = new MongoClient();
 let db: Database | null = null;
@@ -48,7 +49,6 @@ export const insertTask = async (task: string) => {
       task: task,
       complete: false,
     });
-
     console.log(insertTask);
   } catch (error) {
     console.error('Error inserting task:', error);
@@ -69,11 +69,26 @@ export const getTasks = async () => {
 
     // データの取得
     const response: TaskSchema[] = await tasksClient.find({}).toArray();
-    return response;
+    return new Response("Success getting task.");
   } catch (error) {
-    console.error('Error inserting task:', error);
+    console.error('Error getting task:', error);
   }
 };
 
-// 特定のタスクの取得
 // タスクの削除
+export const deleteTask = async (id:ObjectId) => {
+  try {
+    // Connect DB
+    await initConnection();
+    const tasksClient = db!.collection<TaskSchema>("task");
+
+    // データの削除
+    const deleteTask = await tasksClient.deleteOne({ _id: `${id}` })
+    console.log(deleteTask);
+  } catch (error) {
+    console.error("Error delete task:", error)
+  }
+}
+
+
+// 特定のタスクの取得
