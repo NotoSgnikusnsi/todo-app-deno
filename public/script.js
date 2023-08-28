@@ -2,30 +2,30 @@ window.onload = async () => {
   try {
     const response = await fetch('/get-tasks');
     const json = await response?.json();
-    const taskList = document.getElementById("tasks");
+    const taskList = document.getElementById('tasks');
     if (json && json[0] !== undefined) {
-      for (let i = 0; i < json.length ; i++) {
+      for (let i = 0; i < json.length; i++) {
         // box
-        const boxDiv = document.createElement("div");
-        boxDiv.classList.add("box");
+        const boxDiv = document.createElement('div');
+        boxDiv.classList.add('box');
 
         // タスクを表示させる場所
-        const p = document.createElement("p")
-        p.id = json[i]["_id"]
+        const divTask = document.createElement('p');
+        divTask.id = json[i]['_id'];
         const taskTitle = json[i]['task'];
-        const taskComplete = json[i]["complete"] ? '完了済' : '未完了'
-        const content = taskTitle + ":" + taskComplete;
-        p.innerHTML = content;
+        const taskComplete = json[i]['complete'] ? '完了済' : '未完了';
+        const content = taskTitle + ':' + taskComplete;
+        divTask.innerHTML = content;
+        divTask.classList.add('notification');
 
         // 削除ボタン
-        const deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete");
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete', 'is-right');
         deleteButton.onclick = handleDeleteButtonClick;
 
-        p.prepend(deleteButton);
-        boxDiv.appendChild(p)
+        divTask.appendChild(deleteButton);
+        boxDiv.appendChild(divTask);
         taskList.appendChild(boxDiv);
-
       }
     }
   } catch (error) {
@@ -57,17 +57,17 @@ document.getElementById('todo-button').onclick = async (e) => {
   }
 };
 
-const handleDeleteButtonClick = async(e) => {
+const handleDeleteButtonClick = async (e) => {
   e.preventDefault();
-  if (confirm("削除します") === false) {
+  if (confirm('削除します') === false) {
     return;
   }
   const id = e.target.parentNode.id;
   try {
-    await fetch("/delete-task?id=" + id)
+    await fetch('/delete-task?id=' + id);
     location.reload();
   } catch (error) {
     console.log(error);
     return;
   }
-}
+};
