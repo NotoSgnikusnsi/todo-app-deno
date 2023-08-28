@@ -36,7 +36,6 @@
       try {
         const response = await fetch('/get-tasks');
         const json = await response?.json();
-        console.log(JSON.stringify(json));
         if (json && json[0] !== undefined) {
           for (let i = 0; i < json.length ; i++) {
             const li = document.createElement("li")
@@ -52,7 +51,7 @@
 
             li.append(deleteButton);
             
-            document.getElementById("tasks").innerHTML = li;
+            document.getElementById("tasks").innerHTML += li;
 
             // document.getElementById('tasks').innerHTML += `<li id="${json[i]["_id"]}">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'}</li>`;
           }
