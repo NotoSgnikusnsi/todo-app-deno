@@ -9,7 +9,7 @@
     "lib": ["deno.window"]
   },
   "lint": {
-    "include": ["./**/*.ts", "./*.ts"],
+    "include": ["./**/*.ts", "./**/*.js", "./*.ts"],
     "rules": {
       "tags": ["recommended"],
       "include": ["ban-untagged-todo"],
@@ -23,7 +23,7 @@
     "semiColons": true,
     "singleQuote": true,
     "proseWrap": "preserve",
-    "include": ["./**/*.ts", "./*.ts"]
+    "include": ["./**/*.ts", "./**/*.js", "./*.ts"]
   },
   "test": {
     "include": [
