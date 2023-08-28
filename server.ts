@@ -1,6 +1,6 @@
 import { serve } from 'https://deno.land/std@0.180.0/http/server.ts';
 import { serveDir } from 'https://deno.land/std@0.180.0/http/file_server.ts';
-import { getTasks, insertTask, deleteTask } from './modules/dbConnecter.ts';
+import { deleteTask, getTasks, insertTask } from './modules/dbConnecter.ts';
 
 serve(async (req) => {
   const pathname = new URL(req.url).pathname;
@@ -22,12 +22,10 @@ serve(async (req) => {
   }
 
   // タスクの削除
-  if (pathname === "/delete-task" && req.method === "GET") {
-    const id = await new URL(req.url).searchParams.get("id")
-    console.log("server.id:" + id);
+  if (pathname === '/delete-task' && req.method === 'GET') {
+    const id = await new URL(req.url).searchParams.get('id');
     if (id && id !== undefined) {
       await deleteTask(id);
-      
     }
   }
 

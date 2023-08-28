@@ -76,20 +76,19 @@ export const getTasks = async () => {
 };
 
 // タスクの削除
-export const deleteTask = async (id:string) => {
+export const deleteTask = async (id: string) => {
   try {
     // Connect DB
     await initConnection();
-    const tasksClient = db!.collection<TaskSchema>("task");
+    const tasksClient = db!.collection<TaskSchema>('task');
 
     // データの削除
-    console.log("db.id:" + id);
-    const deleteTask = await tasksClient.deleteOne({ _id: new ObjectId(id) })
+    console.log('delete id: ' + id);
+    const deleteTask = await tasksClient.deleteOne({ _id: new ObjectId(id) });
     console.log(deleteTask);
   } catch (error) {
-    console.error("Error delete task:", error)
+    console.error('Error delete task:', error);
   }
-}
-
+};
 
 // 特定のタスクの取得
