@@ -39,21 +39,21 @@
         const taskList = document.getElementById("tasks");
         if (json && json[0] !== undefined) {
           for (let i = 0; i < json.length ; i++) {
-            const li = document.createElement("li")
-            li.id = json[i]["_id"]
+            const p = document.createElement("p")
+            p.id = json[i]["_id"]
             const taskTitle = json[i]['task'];
             const taskComplete = json[i]["complete"] ? '完了済' : '未完了'
             const content = taskTitle + ":" + taskComplete;
-            li.innerHTML = content;
+            p.innerHTML = content;
 
             const deleteButton = document.createElement("button");
-            deleteButton.classList.add("button")
+            deleteButton.classList.add("button","is-small","is-danger");
+            deleteButton.innerText = "X";
             deleteButton.onclick = handleDeleteButtonClick;
 
-            li.appendChild(deleteButton);
+            p.appendChild(deleteButton);
             
-            taskList.appendChild(li);
-            // document.getElementById('tasks').innerHTML += `<li id="${json[i]["_id"]}">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'}</li>`;
+            taskList.appendChild(p);
           }
         }
       } catch (error) {
@@ -91,9 +91,8 @@
         return;
       }
       const id = e.target.parentNode.id;
-      console.log(id)
       try {
-        await fetch("/delete-button?id=" + id)
+        await fetch("/delete-task?id=" + id)
       } catch (error) {
         console.log(error);
         return;

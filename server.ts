@@ -8,8 +8,7 @@ serve(async (req) => {
 
   // タスクの取得
   if (pathname === '/get-tasks' && req.method === 'GET') {
-    const id = new URL(req.url).searchParams.get("id")
-    const response = await getTasks(id);
+    const response = await getTasks();
     return new Response(JSON.stringify(response));
   }
 
@@ -19,17 +18,15 @@ serve(async (req) => {
     console.log(reqJson);
     if (reqJson && reqJson.task !== undefined) {
       await insertTask(reqJson.task);
-      return new Response("Success inserting task.")
     }
   }
 
   // タスクの削除
   if (pathname === "/delete-task" && req.method === "GET") {
-    const reqJson = await req.json()
-    console.log(reqJson);
-    if (reqJson && reqJson._id !== undefined) {
-      await deleteTask(reqJson._id);
-      return new Response("Success deleting task.");
+    const id = await new URL(req.url).searchParams.get("id")
+    console.log("server.id:" + id);
+    if (id && id !== undefined) {
+      await deleteTask(id);
       
     }
   }

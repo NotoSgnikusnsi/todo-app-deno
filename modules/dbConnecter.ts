@@ -76,14 +76,15 @@ export const getTasks = async () => {
 };
 
 // タスクの削除
-export const deleteTask = async (id:ObjectId) => {
+export const deleteTask = async (id:string) => {
   try {
     // Connect DB
     await initConnection();
     const tasksClient = db!.collection<TaskSchema>("task");
 
     // データの削除
-    const deleteTask = await tasksClient.deleteOne({ _id: `${id}` })
+    console.log("db.id:" + id);
+    const deleteTask = await tasksClient.deleteOne({ _id: new ObjectId(id) })
     console.log(deleteTask);
   } catch (error) {
     console.error("Error delete task:", error)
