@@ -26,10 +26,8 @@
         </form>
         <h2>タスク一覧</h2>
         <ul id="tasks">
-          <li id="1" id="task">Task_1</li>
-          <li id="2" id="task">Task_2</li>
-          <li id="3" id="task">Task_3</li>
-        </ul>
+          <li id="1">hoge<button>X</button></li>
+        </ul> 
       </div>
     </div>
   </body>
@@ -38,16 +36,31 @@
       try {
         const response = await fetch('/get-tasks');
         const json = await response?.json();
+        const taskList = document.getElementById("tasks");
         if (json && json[0] !== undefined) {
           for (let i = 0; i < json.length ; i++) {
-            document.getElementById('tasks').innerHTML += `<li id="">${json[i]['task']}:${json[i]["complete"] ? '完了済' : '未完了'
-            }</li>`;
+            const p = document.createElement("p")
+            p.id = json[i]["_id"]
+            const taskTitle = json[i]['task'];
+            const taskComplete = json[i]["complete"] ? '完了済' : '未完了'
+            const content = taskTitle + ":" + taskComplete;
+            p.innerHTML = content;
+
+            const deleteButton = document.createElement("button");
+            deleteButton.classList.add("button","is-small","is-danger");
+            deleteButton.innerText = "X";
+            deleteButton.onclick = handleDeleteButtonClick;
+
+            p.appendChild(deleteButton);
+            
+            taskList.appendChild(p);
           }
         }
       } catch (error) {
         console.log(error);
       }
     };
+
     document.getElementById('todo-button').onclick = async (e) => {
       e.preventDefault();
       const task = document.getElementById('todo-input').value;
@@ -71,5 +84,20 @@
         return;
       }
     };
+
+    const handleDeleteButtonClick = async(e) => {
+      e.preventDefault();
+      if (confirm("削除します") === false) {
+        return;
+      }
+      const id = e.target.parentNode.id;
+      try {
+        await fetch("/delete-task?id=" + id)
+        location.reload();
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    }
   </script>
 </html>
