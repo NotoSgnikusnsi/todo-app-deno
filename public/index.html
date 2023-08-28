@@ -93,6 +93,7 @@
       const id = e.target.parentNode.id;
       try {
         await fetch("/delete-task?id=" + id)
+        window.onload();
       } catch (error) {
         console.log(error);
         return;
