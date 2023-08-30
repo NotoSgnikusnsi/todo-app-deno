@@ -16,6 +16,7 @@ window.onload = async () => {
         const taskCompleteLabel = document.createElement("label")
         taskCompleteLabel.classList.add("checkbox")
         const taskCompleteInput = document.createElement("input")
+        taskCompleteInput.setAttribute("type", "checkbox");
         taskCompleteInput.classList.add("checkbox");
         taskCompleteInput.checked = json[i]["complete"];
         taskCompleteLabel.appendChild(taskCompleteInput);
