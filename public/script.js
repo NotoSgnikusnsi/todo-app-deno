@@ -13,9 +13,16 @@ window.onload = async () => {
         const divTask = document.createElement('p');
         divTask.id = json[i]['_id'];
         const taskTitle = json[i]['task'];
-        const taskComplete = json[i]['complete'] ? '完了済' : '未完了';
-        const content = taskTitle + ':' + taskComplete;
-        divTask.innerHTML = content;
+        const taskCompleteLabel = document.createElement("label")
+        taskCompleteLabel.classList.add("checkbox")
+        const taskCompleteInput = document.createElement("input")
+        taskCompleteInput.setAttribute("type", "checkbox");
+        taskCompleteInput.classList.add("checkbox");
+        taskCompleteInput.checked = json[i]["complete"];
+        taskCompleteLabel.appendChild(taskCompleteInput);
+        // const taskComplete = json[i]['complete'] ? '完了済' : '未完了';
+        taskTitle.prepend(taskCompleteLabel);
+        divTask.appendChild(taskTitle);
         divTask.classList.add('notification');
 
         // 削除ボタン
